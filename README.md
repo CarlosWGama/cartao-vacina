@@ -9,10 +9,15 @@ Autor: Carlos (@carloswgama)
 ## Telas
 
 - Login
-![alt text](./layouts/telas/login.jpg)
+
+<img src="./layouts/telas/login.jpg" height="400">
+
 
 - Lista de vacinas
-![alt text](./layouts/telas/vacinas.jpg)
+
+<img src="./layouts/telas/vacinas.jpg" height="400">
+
 
 - Vacina edição
-![alt text](./layouts/telas/vacina-edicao.jpg)
+
+<img src="./layouts/telas/vacina-edicao.jpg" height="400">
