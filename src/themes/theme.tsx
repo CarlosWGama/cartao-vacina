@@ -15,7 +15,7 @@ export const AppMain: any = styled.View`
 export const AppContainer: any  = styled.View`
     margin-top: ${(props:any) => props.noMarginTop ?  '0px' : '80px'};
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     flex: 1;
     align-items: ${(props:any) => props.horizontalAlign ?  props.horizontalAlign : 'center'};
     justify-content: ${(props:any) => props.verticalAlign ?  props.verticalAlign : 'center'};
@@ -77,7 +77,7 @@ export const AppBackButton = (props:{backScreen?:string}) => {
     </TouchableOpacity>)
 }
 
-export const AppHeader = (props: {titulo: string, leftComponent?: any, rightComponent?:any}) => {
+export const AppHeader = (props: {titulo: string, leftComponent?: any, rightComponent?:any, posicao?: 'left'|'right'|'center'}) => {
 
     return (
         <View style={{width:'100%'}}>
@@ -89,8 +89,8 @@ export const AppHeader = (props: {titulo: string, leftComponent?: any, rightComp
                 paddingTop: 10,
                 height: 120,
                 backgroundColor: Colors.PRIMARY,
-                borderBottomStartRadius: 70,
-                borderBottomEndRadius: -50
+                borderBottomStartRadius: (['left',undefined].includes(props.posicao) ? 70 : 0),
+                borderBottomEndRadius: (['right'].includes(props.posicao) ? 70 : 0),
             }}>
                 <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems:'center', padding: 20}}>
                     {/* Conteudo Esquerda */}
@@ -110,11 +110,10 @@ export const AppHeader = (props: {titulo: string, leftComponent?: any, rightComp
                     marginBottom: -150
                 }}
             >       
-                <View style={{flex: 1, backgroundColor: 'white', borderTopRightRadius: 100}}></View>
+                <View style={{flex: 1, backgroundColor: 'white', borderTopRightRadius: (['left',undefined, 'center'].includes(props.posicao) ? 100 : 0), borderTopStartRadius: (['right', 'center'].includes(props.posicao) ? 100 : 0)}}></View>
             </View>
         </View>
     )
-
 }
 
 export const AppToolbar = (props:{backButton?:boolean, backScreen?:string, titulo: string, extra?:any, backgroundColor?: string}) => {

@@ -2,10 +2,13 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { VacinasListarScreen } from '../screens/vacinas/listar';
+import { SintomasListarScreen } from '../screens/sintomas/listar';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Text } from 'react-native';
 import { fontPadrao } from '../themes/theme';
 import * as Colors from '../themes/colors';
+import { ConfiguracoesScreen } from '../screens/configuracoes';
+import { VacinaEdicaoScreen } from '../screens/vacinas/edicao';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -14,9 +17,23 @@ const Stack = createStackNavigator();
 const VacinaNavigation = () => (
     <Stack.Navigator initialRouteName="listar" screenOptions={{headerShown: false}}>
         <Stack.Screen name="listar" component={VacinasListarScreen} />
+        <Stack.Screen name="edicao" component={VacinaEdicaoScreen} />
     </Stack.Navigator>
 )
 
+//Sintomas
+const SintomasNavigation = () => (
+    <Stack.Navigator initialRouteName="listar" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="listar" component={SintomasListarScreen} />
+    </Stack.Navigator>
+)
+
+//Configurações
+const ConfiguracoesNavigation = () => (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="configuracoes" component={ConfiguracoesScreen} />
+    </Stack.Navigator>
+)
 
 const AppNavigation = () => {
     
@@ -32,13 +49,13 @@ const AppNavigation = () => {
                 tabBarIcon: ({focused})=> <MaterialIcons name="calendar-today" color={colorIconFocus(focused)}  size={sizeIconFocus(focused)}/>}} />
         
         {/* SINTOMAS */}
-        <Tab.Screen name="sintomas" component={VacinaNavigation} 
+        <Tab.Screen name="sintomas" component={SintomasNavigation} 
             options={{
                 tabBarLabel: ({focused}) => <Text style={styleLabelFocus(focused)}>Sintomas</Text>, 
                 tabBarIcon: ({focused})=> <MaterialIcons name="healing" color={colorIconFocus(focused)}  size={sizeIconFocus(focused)}/>}}/>
         
         {/* CONFIGURAÇÕES */}
-        <Tab.Screen name="configuracoes" component={VacinaNavigation} 
+        <Tab.Screen name="configuracoes" component={ConfiguracoesNavigation} 
             options={{
                 tabBarLabel: ({focused}) => <Text style={styleLabelFocus(focused)}>Configurações</Text>, 
                 tabBarIcon: ({focused})=> <MaterialIcons name="account-circle" color={colorIconFocus(focused)}  size={sizeIconFocus(focused)}/>}} />
