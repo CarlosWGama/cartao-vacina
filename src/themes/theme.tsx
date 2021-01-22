@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/native'
 import * as Colors from './colors';
 import { Text, TouchableOpacity, View, Image, StyleSheet, DynamicColorIOS } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'
+import moment from 'moment';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { onChange } from 'react-native-reanimated';
 
 export const AppMain: any = styled.View`
     flex: 1;
@@ -144,6 +147,29 @@ export const AppToolbar = (props:{backButton?:boolean, backScreen?:string, titul
         </View>
     )
 }
+
+export function AppCalendario(props: {valor?: string, onChange: any}) {
+    
+    const [ calendario, setCalendario ] = useState(false);
+    const { valor, onChange } = props;
+
+    return (
+    <>
+        <TouchableOpacity onPress={() => setCalendario(true)}>
+            <Text>{valor != undefined ? moment(valor).format('DD/MM/YYYY') : 'Clique para selecionar data'}</Text>
+        </TouchableOpacity>
+        {calendario && 
+            <DateTimePicker
+            value={ (valor != undefined ? new Date(valor) : new Date())}
+            mode="date"
+            onChange={(event, data) => {
+                setCalendario(false);
+                onChange(moment(data).format('YYYY-MM-DD'))
+            }}
+            />}
+    </>)
+} 
+
 
 export const fontPadrao = StyleSheet.create({
     regular:{fontFamily:'Nunito_400Regular'}, 

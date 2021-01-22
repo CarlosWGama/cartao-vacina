@@ -3,6 +3,7 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Vacina } from '../../../models/vacina';
 import { AppMain, AppToolbar, AppContainer } from '../../../themes/theme'; 
+import { Formulario } from './components';
 
 export function VacinaEdicaoScreen () {
 
@@ -17,11 +18,15 @@ export function VacinaEdicaoScreen () {
     }, [])
 
 
+    const titulo = ('id' in vacina ? 'Edição de Vacina' : 'Cadastro de Vacina')
+    
+
     return (
       <AppMain>
-        <AppToolbar titulo="Cadastro de usuário" backScreen="listar"/>
+        <AppToolbar titulo={titulo} backScreen="listar"/>
         <AppContainer>
-            <Text>Conteúdo</Text>
+
+          <Formulario vacina={vacina}/>
         </AppContainer>
       </AppMain>
     );
