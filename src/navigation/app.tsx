@@ -9,13 +9,14 @@ import { fontPadrao } from '../themes/theme';
 import * as Colors from '../themes/colors';
 import { ConfiguracoesScreen } from '../screens/configuracoes';
 import { VacinaEdicaoScreen } from '../screens/vacinas/edicao';
+import { SintomaEdicaoScreen } from '../screens/sintomas/edicao';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 //Vacina
 const VacinaNavigation = () => (
-    <Stack.Navigator initialRouteName="listar" screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="listar" component={VacinasListarScreen} />
         <Stack.Screen name="edicao" component={VacinaEdicaoScreen} />
     </Stack.Navigator>
@@ -23,8 +24,9 @@ const VacinaNavigation = () => (
 
 //Sintomas
 const SintomasNavigation = () => (
-    <Stack.Navigator initialRouteName="listar" screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="listar" component={SintomasListarScreen} />
+        <Stack.Screen name="edicao" component={SintomaEdicaoScreen} />
     </Stack.Navigator>
 )
 

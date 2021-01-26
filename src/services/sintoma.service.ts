@@ -11,7 +11,7 @@ const SintomaService = {
         await new Promise((resolve, erro) => { setTimeout(() => resolve('a'), 1000)} )
 
         const sintomas: Sintoma[] = [
-            {id: 1, tipo_id: 1, data_ocorrencia: '25-01-2021', outro_tipo: 'Dor de dente', vacina: {id:1, tipo: 1, dose1_data: '2021-01-21', dose1_lote: 1, dose1_proxima_dose:'2021-01-21'}, vacina_id: 1},
+            {id: 1, tipo_id: 1, data_ocorrencia: '2021-01-25', outro: 'Dor de dente', vacina: {id:1, tipo: 1, dose1_data: '2021-01-21', dose1_lote: 1, dose1_proxima_dose:'2021-01-21'}, vacina_id: 1},
         ]
         return sintomas;
     },

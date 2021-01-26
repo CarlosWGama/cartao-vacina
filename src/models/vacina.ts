@@ -29,6 +29,6 @@ export function useTipoVacina(vacina:Vacina) {
         case 2: return 'Coronavac (Butantan)';
         case 3: return 'Peizer';
         case 4: return 'Moderna';
-        default: return vacina.outro;
+        default: return String(vacina.outro);
     }
 }
