@@ -8,7 +8,7 @@ const api = axios.create({
 
 export async function autenticado() {
     const token = await AsyncStorage.getItem('jwt');
-    api.defaults.headers.common = {'Authorization': `${token}`}
+    api.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     return api;
 }
 

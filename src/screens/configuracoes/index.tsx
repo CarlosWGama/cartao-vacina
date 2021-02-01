@@ -5,7 +5,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Usuario } from '../../models/usuario';
 import { Toast } from '../../themes/global/util';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import UsuarioService from '../../services/usuario.service';
 import { useUsuarioContext } from '../../context/usuario.context';
 
@@ -88,9 +87,9 @@ export function ConfiguracoesScreen () {
 
                     
                       {/* Botão */}
+                      { !isSubmitting && <AppButton title="Atualizar Dados" onPress={handleSubmit}/>}
                       { erro && <Text style={style.erro}>{erro}</Text>}
                       { isSubmitting && <ActivityIndicator />}
-                      { !isSubmitting && <AppButton title="Atualizar Dados" onPress={handleSubmit}/>}
 
                   </View>
                 )}

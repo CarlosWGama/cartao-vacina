@@ -7,10 +7,6 @@ const UsuarioService = {
 
     /** Realiza o login do usuário */
     login: async (email: string, senha: string): Promise<{sucesso: boolean, usuario?:Usuario}> => {
-
-        return {sucesso: true, usuario: {nome: 'Carlo'}};
-
-
         try {
             const response = await api.post('/login', {email, senha});
             if (response.status == 200) {
@@ -27,9 +23,6 @@ const UsuarioService = {
 
     /** Cadastra um usuário */
     cadastrar: async (usuario: Usuario): Promise<{sucesso: boolean, erro?:string}> => {
-
-        return {sucesso: true};
-
         try {
             const response = await api.post('/usuarios', {usuario})
             if (response.status == 201)
@@ -45,18 +38,16 @@ const UsuarioService = {
         const api = await autenticado();
         try {
             usuario = await limpaObjeto(usuario);
-            const response = api.put('/usuarios', {usuario})
+            const response = await api.put('/usuarios', {usuario})
             return {sucesso: true}
         } catch(erro) {
+            console.log(erro);
             return {sucesso: false, erro:getErroMsg(erro)}
         }
     },
 
     /** Solicita a recuperação do email do usuário */
-    recuperarSenha: async (email: string): Promise<{sucesso: boolean}> => {
-
-        return {sucesso: true};
-        
+    recuperarSenha: async (email: string): Promise<{sucesso: boolean}> => {        
         try {
             const response = await api.put('/senha', {email})
             return {sucesso: (response.status == 200)}
