@@ -25,7 +25,7 @@ export function VacinasListarScreen () {
       Alert.alert('Excluir Vacina', 'Deseja excluir essa vacina?', [
         {text: 'Cancelar'},
         {text: 'Confirmar', onPress: async () => {
-          VacinaService.excluir(vacina.id);
+          await VacinaService.excluir(vacina.id);
           setBuscando(true);
           await buscarVacinas();
           setBuscando(false);
@@ -39,7 +39,9 @@ export function VacinasListarScreen () {
 
     //Inicial
     React.useEffect(() => {
-      buscarVacinas()
+      nav.addListener('focus', () => {
+        buscarVacinas();
+      })
     }, [])
 
     return (

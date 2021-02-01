@@ -78,7 +78,8 @@ export function CardVacina(props:{vacina:Vacina, onEditar?:any, onExcluir?:any})
                 {/* DOSE 2 */}
                 <View style={{alignItems:'center'}}>
                     <Text style={{color:'white'}}>{ vacina.dose2_data ?  "Dose 2" : "Próxima dose"}</Text>
-                    <Text style={{color:'white'}}>{ moment(vacina.dose2_data ? vacina.dose2_data : vacina.dose1_proxima_dose).format('DD/MM/YYYY')}</Text>
+                    { (vacina.dose2_data || vacina.dose1_proxima_dose) &&
+                    <Text style={{color:'white'}}>{ moment(vacina.dose2_data ? vacina.dose2_data : vacina.dose1_proxima_dose).format('DD/MM/YYYY')}</Text>}
                 </View>
             </View>
             {/* OPÇÕES */}

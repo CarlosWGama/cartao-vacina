@@ -44,7 +44,7 @@ export function Formulario (props: FormularioProps) {
                 tipo: Yup.number().required('Selecione o tipo da vacina'),
                 outro: Yup.string().when("tipo", {
                   is: 5,
-                  then: Yup.string().required('Informe o nome da vacina')
+                  then: Yup.string().required('Informe o nome da vacina').nullable()
                 }),
                 dose1_data: Yup.string().required('Data da 1º dose obrigatória')
             })}
@@ -82,6 +82,7 @@ export function Formulario (props: FormularioProps) {
                     { values.tipo == 5 &&
                     <AppInput titulo="Outra" touched={touched.outro} error={errors.outro} noBorder>
                         <TextInput 
+                            value={values.outro ? values.outro : ''}
                             placeholder="Digite o nome da vacina"
                             onBlur={handleBlur('outro')} 
                             onChangeText={handleChange('outro')} />
@@ -103,6 +104,7 @@ export function Formulario (props: FormularioProps) {
                     <AppInput titulo="Lote" touched={touched.dose1_lote} error={errors.dose1_lote}>
                         <TextInput 
                             keyboardType="decimal-pad"
+                            value={values.dose1_lote ? String(values.dose1_lote) : ''}
                             placeholder="Digite o lote"
                             onBlur={handleBlur('dose1_lote')} 
                             onChangeText={handleChange('dose1_lote')} />
@@ -133,6 +135,7 @@ export function Formulario (props: FormularioProps) {
                     <AppInput titulo="Lote" touched={touched.dose2_lote} error={errors.dose2_lote} noBorder>
                         <TextInput 
                             keyboardType="decimal-pad"
+                            value={values.dose2_lote ? String(values.dose2_lote) : ''}
                             placeholder="Digite o lote"
                             onBlur={handleBlur('dose2_lote')} 
                             onChangeText={handleChange('dose2_lote')} />
