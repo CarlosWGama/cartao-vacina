@@ -42,7 +42,6 @@ export function Formulario (props: FormularioProps) {
 
     const salvar = async (sintoma: Sintoma) => {
       setErro(null);
-
       //Realiza a operação
       const resposta = (sintoma?.id ? await SintomaService.editar(sintoma) : await SintomaService.cadastrar(sintoma))
       
@@ -60,9 +59,10 @@ export function Formulario (props: FormularioProps) {
             enableReinitialize
             // Validação de formulário
             validationSchema={Yup.object().shape({
-                outro: Yup.string().when("tipo_id", {
-                  is: 5,
-                  then: Yup.string().required('Informe o nome do sintoma')
+                tipo_id: Yup.number(),
+                outro: Yup.string().nullable().when("tipo_id", {
+                  is: -1,
+                  then: Yup.string().required('Informe o nome do sintoma').nullable()
                 }),
                 data_ocorrencia: Yup.string().required('Data obrigatória')
             })}

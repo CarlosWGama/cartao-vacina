@@ -39,7 +39,9 @@ export function SintomasListarScreen () {
 
   //Inicial
   React.useEffect(() => {
-    buscarSintomas()
+    nav.addListener('focus', () => {
+      buscarSintomas()
+    })
   }, [])
 
   return (

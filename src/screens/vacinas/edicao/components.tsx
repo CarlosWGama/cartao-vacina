@@ -42,7 +42,7 @@ export function Formulario (props: FormularioProps) {
             // Validação de formulário
             validationSchema={Yup.object().shape({
                 tipo: Yup.number().required('Selecione o tipo da vacina'),
-                outro: Yup.string().when("tipo", {
+                outro: Yup.string().nullable().when("tipo", {
                   is: 5,
                   then: Yup.string().required('Informe o nome da vacina').nullable()
                 }),

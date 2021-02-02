@@ -7,20 +7,18 @@ const SintomaService = {
     /** Busca as sintomas do usuário logado */
     buscar: async (): Promise<Sintoma[]> => {
 
-        //Delay
-        await new Promise((resolve, erro) => { setTimeout(() => resolve('a'), 1000)} )
+        const sintomas: Sintoma[] = [];
 
-        const sintomas: Sintoma[] = [
-            {id: 1, tipo_id: 1, data_ocorrencia: '2021-01-25', outro: 'Dor de dente', vacina: {id:1, tipo: 1, dose1_data: '2021-01-21', dose1_lote: 1, dose1_proxima_dose:'2021-01-21'}, vacina_id: 1},
-        ]
+        const api = await autenticado();
+        try {
+            const response = await api.get('/sintomas')
+            if (response.status == 200) response.data.forEach(s => sintomas.push(s));
+        } catch(erro) { console.log(erro) }
         return sintomas;
     },
 
     /** Cadastra uma sintoma */
     cadastrar: async (sintoma: Sintoma): Promise<{sucesso: boolean, erro?:string}> => {
-
-        await new Promise((resolve, erro) => { setTimeout(() => resolve('a'), 1000)} )
-        return {sucesso: true};
 
         const api = await autenticado();
         try {
@@ -36,13 +34,11 @@ const SintomaService = {
     /** Atualiza uma sintoma */  
     editar: async (sintoma: Sintoma): Promise<{sucesso: boolean, erro?:string}> => {
 
-        await new Promise((resolve, erro) => { setTimeout(() => resolve('a'), 1000)} )
-        return {sucesso: true};
-
         const api = await autenticado();
         try {
             sintoma = await limpaObjeto(sintoma);
-            const response = api.put(`/sintomas/${sintoma.id}`, {sintoma})
+            delete sintoma['vacina'];
+            const response = await api.put(`/sintomas/${sintoma.id}`, {sintoma})
             return {sucesso: true}
         } catch(erro) {
             return {sucesso: false, erro:getErroMsg(erro)}
@@ -51,13 +47,9 @@ const SintomaService = {
 
     /** Solicita a recuperação do email do usuário */
     excluir: async (sintomaID: number): Promise<{sucesso: boolean, erro?:string}> => {
-
-        await new Promise((resolve, erro) => { setTimeout(() => resolve('a'), 1000)} )
-        return {sucesso: true};
-        
         const api = await autenticado();
         try {
-            const response = api.delete(`/sintomas/${sintomaID}`)
+            const response = await api.delete(`/sintomas/${sintomaID}`)
             return {sucesso: true}
         } catch(erro) {
             return {sucesso: false, erro:getErroMsg(erro)}
