@@ -92,7 +92,7 @@ export function Formulario (props: FormularioProps) {
 
 
                     {/* TIPO */}
-                    <AppInput titulo="Tipo de Sintoma" touched={touched.tipo_id} error={errors.tipo_id} noBorder={values.tipo_id != -1}>
+                    <AppInput titulo="Tipo de Sintoma" touched={touched.tipo_id} error={errors.tipo_id}>
                     <RNPickerSelect
                           items={sintomas}
                           value={(values.tipo_id ? values.tipo_id : 1)}
@@ -107,7 +107,7 @@ export function Formulario (props: FormularioProps) {
 
                     {/* OUTRO */}
                     { values.tipo_id == -1 &&
-                    <AppInput titulo="Outra" touched={touched.outro} error={errors.outro} noBorder>
+                    <AppInput titulo="Outra" touched={touched.outro} error={errors.outro}>
                         <TextInput 
                             placeholder="Digite o nome da sintoma"
                             onBlur={handleBlur('outro')} 
@@ -115,7 +115,7 @@ export function Formulario (props: FormularioProps) {
                     </AppInput>}
 
                     {/* DATA */}
-                    <AppInput titulo="Data do Sintoma" touched={touched.data_ocorrencia} error={errors.data_ocorrencia}>
+                    <AppInput titulo="Data do Sintoma" touched error={errors.data_ocorrencia} noBorder>
                         <AppCalendario
                           valor={values.data_ocorrencia} onChange={(data) => {
                             setFieldValue('data_ocorrencia', data)

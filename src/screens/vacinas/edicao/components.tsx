@@ -3,13 +3,14 @@ import * as React from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TextInput } from 'react-native';
 import { AppMain, AppInput, AppButton, AppCalendario } from '../../../themes/theme'; 
 import * as Yup from 'yup';
-import { Vacina } from '../../../models/vacina';
+import { useTipoVacina, Vacina } from '../../../models/vacina';
 import RNPickerSelect from 'react-native-picker-select';
 import * as Colors from './../../../themes/colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import VacinaService from '../../../services/vacina.service';
 import { Toast } from '../../../themes/global/util';
 import { useNavigation } from '@react-navigation/native';
+import * as Notifications from 'expo-notifications';
+import moment from 'moment';
 
 export interface FormularioProps {
   vacina: Vacina;
@@ -27,7 +28,35 @@ export function Formulario (props: FormularioProps) {
       //Realiza a operação
       const resposta = (vacina?.id ? await VacinaService.editar(vacina) : await VacinaService.cadastrar(vacina))
       
-      if (resposta.sucesso) {
+      const lembreteSintomas = (dias: number) => {
+        Notifications.scheduleNotificationAsync({
+          content: {
+            title: `Sentiu algum sintoma da vacina?`,
+            body: `Caso tenha sentido algum sintoma da vacina - ${useTipoVacina(vacina)}, lembre-se de informar no aplicativo na seção de sintomas`
+          }, trigger: { seconds: (60 * 60 * 24 * dias) }
+        })
+      }
+
+      if (resposta.sucesso && vacina.id == undefined) {
+
+        //Criando notificação da próxima dose
+        if (vacina.dose1_proxima_dose) {
+          const hoje = moment();
+          const proximaDose = moment(vacina.dose1_proxima_dose, 'YYYY-MM-DD');
+          Notifications.scheduleNotificationAsync({
+            content: {
+              title: `Segunda dose da vacina`,
+              body: `Lembrete da sua segunda dose da vacina - ${useTipoVacina(vacina)}`
+            }, trigger: { seconds: proximaDose.diff(hoje, 'seconds')}
+          })
+        }
+
+        //Lembre te de sintomas
+        lembreteSintomas(5); //5 dias
+        lembreteSintomas(15); //15 dias
+        lembreteSintomas(30); //30 dias
+
+        //VOltando para página anterior
         Toast('Operação realizada com sucesso')
         nav.navigate('listar');
       } else 
@@ -92,7 +121,7 @@ export function Formulario (props: FormularioProps) {
                     {/* ========== DOSE 1 ======== */}
                     <Text style={stylesForm.titulo}>Dose 1</Text>
                     {/* DATA */}
-                    <AppInput titulo="Data" touched={touched.dose1_data} error={errors.dose1_data}>
+                    <AppInput titulo="Data" touched error={errors.dose1_data}>
                         <AppCalendario
                           valor={values.dose1_data} onChange={(data) => {
                             setFieldValue('dose1_data', data)
@@ -111,7 +140,7 @@ export function Formulario (props: FormularioProps) {
                     </AppInput>
 
                     {/* PROXIMA DOSE */}
-                    <AppInput titulo="Próxima Dose" touched={touched.dose1_proxima_dose} error={errors.dose1_proxima_dose} noBorder>
+                    <AppInput titulo="Próxima Dose" touched error={errors.dose1_proxima_dose} noBorder>
                       <AppCalendario
                             valor={values.dose1_proxima_dose} onChange={(data) => {
                               setFieldValue('dose1_proxima_dose', data)
@@ -123,7 +152,7 @@ export function Formulario (props: FormularioProps) {
                     {/* ========== DOSE 2 ======== */}
                     <Text style={stylesForm.titulo}>Dose 2</Text>
                     {/* DATA */}
-                    <AppInput titulo="Data" touched={touched.dose2_data} error={errors.dose2_data}>
+                    <AppInput titulo="Data" touched error={errors.dose2_data}>
                         <AppCalendario
                           valor={values.dose2_data} onChange={(data) => {
                             setFieldValue('dose2_data', data)
