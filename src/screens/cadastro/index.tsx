@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, Button, TextInput, StyleSheet, ActivityIndicator, Platform, ToastAndroid, Image } from 'react-native';
 import { AppMain, AppToolbar, AppContainer, AppInput, AppButton, fontPadrao } from '../../themes/theme'; 
+import * as Colors from '../../themes/colors'; 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -101,7 +102,7 @@ export function CadastroScreen () {
                         </AppInput>
                         {/* Botão */}
                         { erro && <Text style={style.erro}>{erro}</Text>}
-                        { isSubmitting && <ActivityIndicator />}
+                        { isSubmitting && <ActivityIndicator size={30} color={Colors.PRIMARY}/>}
                         { !isSubmitting && <AppButton title="Cadastrar" onPress={handleSubmit}/>}
 
                     </View>

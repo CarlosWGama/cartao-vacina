@@ -71,7 +71,7 @@ export const Formulario = () => {
                         {/* BOTÃO */}
 
                         { !isSubmitting && <AppButton title="Logar" onPress={handleSubmit}/>}
-                        { isSubmitting && <ActivityIndicator/>}
+                        { isSubmitting && <ActivityIndicator size={30} color={Colors.PRIMARY}/>}
                     </View>
                 )} 
             </Formik>

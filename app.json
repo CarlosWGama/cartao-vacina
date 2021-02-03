@@ -2,13 +2,13 @@
   "expo": {
     "name": "cartao-vacina",
     "slug": "cartao-vacina",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon2.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1d32cd"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "package": "com.carloswgama.cartaovacina"
     },
     "web": {
       "favicon": "./assets/favicon.png"

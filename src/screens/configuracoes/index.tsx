@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, TextInput, ActivityIndicator, StyleSheet } from 'react-native';
 import { AppMain, AppHeader, AppContainer, AppInput, AppButton, AppCalendario } from '../../themes/theme'; 
+import * as Colors from '../../themes/colors'; 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Usuario } from '../../models/usuario';
@@ -89,7 +90,7 @@ export function ConfiguracoesScreen () {
                       {/* Botão */}
                       { !isSubmitting && <AppButton title="Atualizar Dados" onPress={handleSubmit}/>}
                       { erro && <Text style={style.erro}>{erro}</Text>}
-                      { isSubmitting && <ActivityIndicator />}
+                      { isSubmitting && <ActivityIndicator size={30} color={Colors.PRIMARY} />}
 
                   </View>
                 )}

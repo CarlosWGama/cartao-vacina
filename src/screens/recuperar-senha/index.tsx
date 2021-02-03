@@ -52,7 +52,7 @@ export function RecuperarSenhaScreen () {
 
                             {/* Botão */}
                             { erro && <Text style={[style.erro, fontPadrao.regular]}>{erro}</Text>}
-                            { isSubmitting && <ActivityIndicator />}
+                            { isSubmitting && <ActivityIndicator size={30} color={Colors.PRIMARY}/>}
                             { !isSubmitting && <AppButton title="Recuperar" onPress={handleSubmit}/>}
                         </>}
 
