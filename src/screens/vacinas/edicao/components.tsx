@@ -52,7 +52,8 @@ export function Formulario (props: FormularioProps) {
         }
 
         //Lembre te de sintomas
-        lembreteSintomas(5); //5 dias
+        lembreteSintomas(1); //1 dias
+        lembreteSintomas(8); //5 dias
         lembreteSintomas(15); //15 dias
         lembreteSintomas(30); //30 dias
 
